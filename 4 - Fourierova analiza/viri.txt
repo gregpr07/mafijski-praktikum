@@ -1,0 +1,4 @@
+Viri
+
+https://pythonnumericalmethods.berkeley.edu/notebooks/chapter24.02-Discrete-Fourier-Transform.html
+https://www.doctormix.com/docs/Note-To-Frequancy-Chart.jpg
