@@ -11,9 +11,10 @@ AUTHOR:
 
 import numpy
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def euler( f, x0, t ):
+
+def euler(f, x0, t):
     """Euler's method to solve x' = f(x,t) with x(t[0]) = x0.
 
     USAGE:
@@ -37,17 +38,18 @@ def euler( f, x0, t ):
                 an array of arrays.
     """
 
-    n = len( t )
-    x = numpy.array( [x0] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        x[i+1] = x[i] + h * f( x[i], t[i] )
+        x[i+1] = x[i] + h * f(x[i], t[i])
 
     return x
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def heun( f, x0, t ):
+
+def heun(f, x0, t):
     """Heun's method to solve x' = f(x,t) with x(t[0]) = x0.
 
     USAGE:
@@ -70,19 +72,20 @@ def heun( f, x0, t ):
                 entry in t array.  If a system is being solved, x will be
                 an array of arrays.
     """
-    n = len( t )
-    x = numpy.array( [x0] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        k1 = h * f( x[i], t[i] )
-        k2 = h * f( x[i] + k1, t[i+1] )
-        x[i+1] = x[i] + ( k1 + k2 ) / 2.0
+        k1 = h * f(x[i], t[i])
+        k2 = h * f(x[i] + k1, t[i+1])
+        x[i+1] = x[i] + (k1 + k2) / 2.0
 
     return x
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def rk2a( f, x0, t ):
+
+def rk2a(f, x0, t):
     """Second-order Runge-Kutta method to solve x' = f(x,t) with x(t[0]) = x0.
        Also known as Midpoint method
 
@@ -111,18 +114,19 @@ def rk2a( f, x0, t ):
         Analysis", 6th Edition, by Burden and Faires, Brooks-Cole, 1997.
     """
 
-    n = len( t )
-    x = numpy.array( [ x0 ] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        k1 = h * f( x[i], t[i] ) / 2.0
-        x[i+1] = x[i] + h * f( x[i] + k1, t[i] + h / 2.0 )
+        k1 = h * f(x[i], t[i]) / 2.0
+        x[i+1] = x[i] + h * f(x[i] + k1, t[i] + h / 2.0)
 
     return x
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def rk2b( f, x0, t ):
+
+def rk2b(f, x0, t):
     """Second-order Runge-Kutta method to solve x' = f(x,t) with x(t[0]) = x0.
 
     USAGE:
@@ -151,19 +155,20 @@ def rk2b( f, x0, t ):
         Brooks-Cole, 1999.
     """
 
-    n = len( t )
-    x = numpy.array( [ x0 ] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        k1 = h * f( x[i], t[i] )
-        k2 = h * f( x[i] + k1, t[i+1] )
-        x[i+1] = x[i] + ( k1 + k2 ) / 2.0
+        k1 = h * f(x[i], t[i])
+        k2 = h * f(x[i] + k1, t[i+1])
+        x[i+1] = x[i] + (k1 + k2) / 2.0
 
     return x
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def rku4( f, x0, t ):
+
+def rku4(f, x0, t):
     """Fourth-order Runge-Kutta method to solve x' = f(x,t) with x(t[0]) = x0.
 
     USAGE:
@@ -187,21 +192,22 @@ def rku4( f, x0, t ):
                 an array of arrays.
     """
 
-    n = len( t )
-    x = numpy.array( [ x0 ] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        k1 = h * f( x[i], t[i] )
-        k2 = h * f( x[i] + 0.5 * k1, t[i] + 0.5 * h )
-        k3 = h * f( x[i] + 0.5 * k2, t[i] + 0.5 * h )
-        k4 = h * f( x[i] + k3, t[i+1] )
-        x[i+1] = x[i] + ( k1 + 2.0 * ( k2 + k3 ) + k4 ) / 6.0
+        k1 = h * f(x[i], t[i])
+        k2 = h * f(x[i] + 0.5 * k1, t[i] + 0.5 * h)
+        k3 = h * f(x[i] + 0.5 * k2, t[i] + 0.5 * h)
+        k4 = h * f(x[i] + k3, t[i+1])
+        x[i+1] = x[i] + (k1 + 2.0 * (k2 + k3) + k4) / 6.0
 
     return x
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def rk45( f, x0, t ):
+
+def rk45(f, x0, t):
     """Fourth-order Runge-Kutta method with error estimate.
 
     USAGE:
@@ -234,70 +240,71 @@ def rk45( f, x0, t ):
 
     # Coefficients used to compute the independent variable argument of f
 
-    c20  =   2.500000000000000e-01  #  1/4
-    c30  =   3.750000000000000e-01  #  3/8
-    c40  =   9.230769230769231e-01  #  12/13
-    c50  =   1.000000000000000e+00  #  1
-    c60  =   5.000000000000000e-01  #  1/2
+    c20 = 2.500000000000000e-01  # 1/4
+    c30 = 3.750000000000000e-01  # 3/8
+    c40 = 9.230769230769231e-01  # 12/13
+    c50 = 1.000000000000000e+00  # 1
+    c60 = 5.000000000000000e-01  # 1/2
 
     # Coefficients used to compute the dependent variable argument of f
 
-    c21 =   2.500000000000000e-01  #  1/4
-    c31 =   9.375000000000000e-02  #  3/32
-    c32 =   2.812500000000000e-01  #  9/32
-    c41 =   8.793809740555303e-01  #  1932/2197
-    c42 =  -3.277196176604461e+00  # -7200/2197
-    c43 =   3.320892125625853e+00  #  7296/2197
-    c51 =   2.032407407407407e+00  #  439/216
-    c52 =  -8.000000000000000e+00  # -8
-    c53 =   7.173489278752436e+00  #  3680/513
-    c54 =  -2.058966861598441e-01  # -845/4104
-    c61 =  -2.962962962962963e-01  # -8/27
-    c62 =   2.000000000000000e+00  #  2
-    c63 =  -1.381676413255361e+00  # -3544/2565
-    c64 =   4.529727095516569e-01  #  1859/4104
-    c65 =  -2.750000000000000e-01  # -11/40
+    c21 = 2.500000000000000e-01  # 1/4
+    c31 = 9.375000000000000e-02  # 3/32
+    c32 = 2.812500000000000e-01  # 9/32
+    c41 = 8.793809740555303e-01  # 1932/2197
+    c42 = -3.277196176604461e+00  # -7200/2197
+    c43 = 3.320892125625853e+00  # 7296/2197
+    c51 = 2.032407407407407e+00  # 439/216
+    c52 = -8.000000000000000e+00  # -8
+    c53 = 7.173489278752436e+00  # 3680/513
+    c54 = -2.058966861598441e-01  # -845/4104
+    c61 = -2.962962962962963e-01  # -8/27
+    c62 = 2.000000000000000e+00  # 2
+    c63 = -1.381676413255361e+00  # -3544/2565
+    c64 = 4.529727095516569e-01  # 1859/4104
+    c65 = -2.750000000000000e-01  # -11/40
 
     # Coefficients used to compute 4th order RK estimate
 
-    a1  =   1.157407407407407e-01  #  25/216
-    a2  =   0.000000000000000e-00  #  0
-    a3  =   5.489278752436647e-01  #  1408/2565
-    a4  =   5.353313840155945e-01  #  2197/4104
-    a5  =  -2.000000000000000e-01  # -1/5
+    a1 = 1.157407407407407e-01  # 25/216
+    a2 = 0.000000000000000e-00  # 0
+    a3 = 5.489278752436647e-01  # 1408/2565
+    a4 = 5.353313840155945e-01  # 2197/4104
+    a5 = -2.000000000000000e-01  # -1/5
 
-    b1  =   1.185185185185185e-01  #  16.0/135.0
-    b2  =   0.000000000000000e-00  #  0
-    b3  =   5.189863547758284e-01  #  6656.0/12825.0
-    b4  =   5.061314903420167e-01  #  28561.0/56430.0
-    b5  =  -1.800000000000000e-01  # -9.0/50.0
-    b6  =   3.636363636363636e-02  #  2.0/55.0
+    b1 = 1.185185185185185e-01  # 16.0/135.0
+    b2 = 0.000000000000000e-00  # 0
+    b3 = 5.189863547758284e-01  # 6656.0/12825.0
+    b4 = 5.061314903420167e-01  # 28561.0/56430.0
+    b5 = -1.800000000000000e-01  # -9.0/50.0
+    b6 = 3.636363636363636e-02  # 2.0/55.0
 
-    n = len( t )
-    x = numpy.array( [ x0 ] * n )
-    e = numpy.array( [ 0 * x0 ] * n )
-    for i in range( n - 1 ):
+    n = len(t)
+    x = numpy.array([x0] * n)
+    e = numpy.array([0 * x0] * n)
+    for i in range(n - 1):
         h = t[i+1] - t[i]
-        k1 = h * f( x[i], t[i] )
-        k2 = h * f( x[i] + c21 * k1, t[i] + c20 * h )
-        k3 = h * f( x[i] + c31 * k1 + c32 * k2, t[i] + c30 * h )
-        k4 = h * f( x[i] + c41 * k1 + c42 * k2 + c43 * k3, t[i] + c40 * h )
-        k5 = h * f( x[i] + c51 * k1 + c52 * k2 + c53 * k3 + c54 * k4, \
-                        t[i] + h )
-        k6 = h * f( \
-            x[i] + c61 * k1 + c62 * k2 + c63 * k3 + c64 * k4 + c65 * k5, \
-            t[i] + c60 * h )
+        k1 = h * f(x[i], t[i])
+        k2 = h * f(x[i] + c21 * k1, t[i] + c20 * h)
+        k3 = h * f(x[i] + c31 * k1 + c32 * k2, t[i] + c30 * h)
+        k4 = h * f(x[i] + c41 * k1 + c42 * k2 + c43 * k3, t[i] + c40 * h)
+        k5 = h * f(x[i] + c51 * k1 + c52 * k2 + c53 * k3 + c54 * k4,
+                   t[i] + h)
+        k6 = h * f(
+            x[i] + c61 * k1 + c62 * k2 + c63 * k3 + c64 * k4 + c65 * k5,
+            t[i] + c60 * h)
 
         x[i+1] = x[i] + a1 * k1 + a3 * k3 + a4 * k4 + a5 * k5
         x5 = x[i] + b1 * k1 + b3 * k3 + b4 * k4 + b5 * k5 + b6 * k6
 
-        e[i+1] = abs( x5 - x[i+1] )
+        e[i+1] = abs(x5 - x[i+1])
 
-    return ( x, e )
+    return (x, e)
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def rkf( f, a, b, x0, tol, hmax, hmin ):
+
+def rkf(f, a, b, x0, tol, hmax, hmin):
     """Runge-Kutta-Fehlberg method to solve x' = f(x,t) with x(t[0]) = x0.
 
     USAGE:
@@ -332,46 +339,46 @@ def rkf( f, a, b, x0, tol, hmax, hmin ):
 
     # Coefficients used to compute the independent variable argument of f
 
-    a2  =   2.500000000000000e-01  #  1/4
-    a3  =   3.750000000000000e-01  #  3/8
-    a4  =   9.230769230769231e-01  #  12/13
-    a5  =   1.000000000000000e+00  #  1
-    a6  =   5.000000000000000e-01  #  1/2
+    a2 = 2.500000000000000e-01  # 1/4
+    a3 = 3.750000000000000e-01  # 3/8
+    a4 = 9.230769230769231e-01  # 12/13
+    a5 = 1.000000000000000e+00  # 1
+    a6 = 5.000000000000000e-01  # 1/2
 
     # Coefficients used to compute the dependent variable argument of f
 
-    b21 =   2.500000000000000e-01  #  1/4
-    b31 =   9.375000000000000e-02  #  3/32
-    b32 =   2.812500000000000e-01  #  9/32
-    b41 =   8.793809740555303e-01  #  1932/2197
-    b42 =  -3.277196176604461e+00  # -7200/2197
-    b43 =   3.320892125625853e+00  #  7296/2197
-    b51 =   2.032407407407407e+00  #  439/216
-    b52 =  -8.000000000000000e+00  # -8
-    b53 =   7.173489278752436e+00  #  3680/513
-    b54 =  -2.058966861598441e-01  # -845/4104
-    b61 =  -2.962962962962963e-01  # -8/27
-    b62 =   2.000000000000000e+00  #  2
-    b63 =  -1.381676413255361e+00  # -3544/2565
-    b64 =   4.529727095516569e-01  #  1859/4104
-    b65 =  -2.750000000000000e-01  # -11/40
+    b21 = 2.500000000000000e-01  # 1/4
+    b31 = 9.375000000000000e-02  # 3/32
+    b32 = 2.812500000000000e-01  # 9/32
+    b41 = 8.793809740555303e-01  # 1932/2197
+    b42 = -3.277196176604461e+00  # -7200/2197
+    b43 = 3.320892125625853e+00  # 7296/2197
+    b51 = 2.032407407407407e+00  # 439/216
+    b52 = -8.000000000000000e+00  # -8
+    b53 = 7.173489278752436e+00  # 3680/513
+    b54 = -2.058966861598441e-01  # -845/4104
+    b61 = -2.962962962962963e-01  # -8/27
+    b62 = 2.000000000000000e+00  # 2
+    b63 = -1.381676413255361e+00  # -3544/2565
+    b64 = 4.529727095516569e-01  # 1859/4104
+    b65 = -2.750000000000000e-01  # -11/40
 
     # Coefficients used to compute local truncation error estimate.  These
     # come from subtracting a 4th order RK estimate from a 5th order RK
     # estimate.
 
-    r1  =   2.777777777777778e-03  #  1/360
-    r3  =  -2.994152046783626e-02  # -128/4275
-    r4  =  -2.919989367357789e-02  # -2197/75240
-    r5  =   2.000000000000000e-02  #  1/50
-    r6  =   3.636363636363636e-02  #  2/55
+    r1 = 2.777777777777778e-03  # 1/360
+    r3 = -2.994152046783626e-02  # -128/4275
+    r4 = -2.919989367357789e-02  # -2197/75240
+    r5 = 2.000000000000000e-02  # 1/50
+    r6 = 3.636363636363636e-02  # 2/55
 
     # Coefficients used to compute 4th order RK estimate
 
-    c1  =   1.157407407407407e-01  #  25/216
-    c3  =   5.489278752436647e-01  #  1408/2565
-    c4  =   5.353313840155945e-01  #  2197/4104
-    c5  =  -2.000000000000000e-01  # -1/5
+    c1 = 1.157407407407407e-01  # 25/216
+    c3 = 5.489278752436647e-01  # 1408/2565
+    c4 = 5.353313840155945e-01  # 2197/4104
+    c5 = -2.000000000000000e-01  # -1/5
 
     # Set t and x according to initial condition and assume that h starts
     # with a value that is as large as possible.
@@ -382,57 +389,58 @@ def rkf( f, a, b, x0, tol, hmax, hmin ):
 
     # Initialize arrays that will be returned
 
-    T = numpy.array( [t] )
-    X = numpy.array( [x] )
+    T = numpy.array([t])
+    X = numpy.array([x])
 
     while t < b:
 
         # Adjust step size when we get to last interval
 
         if t + h > b:
-            h = b - t;
+            h = b - t
 
         # Compute values needed to compute truncation error estimate and
         # the 4th order RK estimate.
 
-        k1 = h * f( x, t )
-        k2 = h * f( x + b21 * k1, t + a2 * h )
-        k3 = h * f( x + b31 * k1 + b32 * k2, t + a3 * h )
-        k4 = h * f( x + b41 * k1 + b42 * k2 + b43 * k3, t + a4 * h )
-        k5 = h * f( x + b51 * k1 + b52 * k2 + b53 * k3 + b54 * k4, t + a5 * h )
-        k6 = h * f( x + b61 * k1 + b62 * k2 + b63 * k3 + b64 * k4 + b65 * k5, \
-                    t + a6 * h )
+        k1 = h * f(x, t)
+        k2 = h * f(x + b21 * k1, t + a2 * h)
+        k3 = h * f(x + b31 * k1 + b32 * k2, t + a3 * h)
+        k4 = h * f(x + b41 * k1 + b42 * k2 + b43 * k3, t + a4 * h)
+        k5 = h * f(x + b51 * k1 + b52 * k2 + b53 * k3 + b54 * k4, t + a5 * h)
+        k6 = h * f(x + b61 * k1 + b62 * k2 + b63 * k3 + b64 * k4 + b65 * k5,
+                   t + a6 * h)
 
         # Compute the estimate of the local truncation error.  If it's small
         # enough then we accept this step and save the 4th order estimate.
 
-        r = abs( r1 * k1 + r3 * k3 + r4 * k4 + r5 * k5 + r6 * k6 ) / h
-        if len( numpy.shape( r ) ) > 0:
-            r = max( r )
+        r = abs(r1 * k1 + r3 * k3 + r4 * k4 + r5 * k5 + r6 * k6) / h
+        if len(numpy.shape(r)) > 0:
+            r = max(r)
         if r <= tol:
             t = t + h
             x = x + c1 * k1 + c3 * k3 + c4 * k4 + c5 * k5
-            T = numpy.append( T, t )
-            X = numpy.append( X, [x], 0 )
+            T = numpy.append(T, t)
+            X = numpy.append(X, [x], 0)
 
         # Now compute next step size, and make sure that it is not too big or
         # too small.
 
-        h = h * min( max( 0.84 * ( tol / r )**0.25, 0.1 ), 4.0 )
+        h = h * min(max(0.84 * (tol / r)**0.25, 0.1), 4.0)
 
         if h > hmax:
             h = hmax
         elif h < hmin:
-            print ("Error: stepsize should be smaller than %e." % hmin)
+            print("Error: stepsize should be smaller than %e." % hmin)
             break
 
     # endwhile
 
-    return ( T, X )
+    return (T, X)
 
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-def pc4( f, x0, t ):
+
+def pc4(f, x0, t):
     """Adams-Bashforth-Moulton 4th order predictor-corrector method
 
     USAGE:
@@ -448,7 +456,7 @@ def pc4( f, x0, t ):
                 if a system of equations is being solved.
         t     - list or NumPy array of t values to compute solution at.
                 t[0] is the the initial condition point, and the difference
-                h=t[i+1]-t[i] determines the step size h.
+                h=t[i+1]-t[                  i] determines the step size h.
 
     OUTPUT:
         x     - NumPy array containing solution values corresponding to each
@@ -472,100 +480,102 @@ def pc4( f, x0, t ):
 
     """
 
-    n = len( t )
-    x = numpy.array( [ x0 ] * n )
+    n = len(t)
+    x = numpy.array([x0] * n)
 
     # Start up with 4th order Runge-Kutta (single-step method).  The extra
     # code involving f0, f1, f2, and f3 helps us get ready for the multi-step
     # method to follow in order to minimize the number of function evaluations
     # needed.
-# Python 2 code transformed from range(...) -> list(range(...)) and
-# xrange(...) -> range(...).
+    # Python 2 code transformed from range(...) -> list(range(...)) and
+    # xrange(...) -> range(...).
     f1 = f2 = f3 = 0
-    for i in range( min( 3, n - 1 ) ):
+    for i in range(min(3, n - 1)):
         h = t[i+1] - t[i]
-        f0 = f( x[i], t[i] )
+        f0 = f(x[i], t[i])
         k1 = h * f0
-        k2 = h * f( x[i] + 0.5 * k1, t[i] + 0.5 * h )
-        k3 = h * f( x[i] + 0.5 * k2, t[i] + 0.5 * h )
-        k4 = h * f( x[i] + k3, t[i+1] )
-        x[i+1] = x[i] + ( k1 + 2.0 * ( k2 + k3 ) + k4 ) / 6.0
-        f1, f2, f3 = ( f0, f1, f2 )
+        k2 = h * f(x[i] + 0.5 * k1, t[i] + 0.5 * h)
+        k3 = h * f(x[i] + 0.5 * k2, t[i] + 0.5 * h)
+        k4 = h * f(x[i] + k3, t[i+1])
+        x[i+1] = x[i] + (k1 + 2.0 * (k2 + k3) + k4) / 6.0
+        f1, f2, f3 = (f0, f1, f2)
 
     # Begin Adams-Bashforth-Moulton steps
 
-    for i in range( 3, n - 1 ):
+    for i in range(3, n - 1):
         h = t[i+1] - t[i]
-        f0 = f( x[i], t[i] )
+        f0 = f(x[i], t[i])
         #predictor (Adams-Bashfort)
-        w = x[i] + h * ( 55.0 * f0 - 59.0 * f1 + 37.0 * f2 - 9.0 * f3 ) / 24.0
-        fw = f( w, t[i+1] )
+        w = x[i] + h * (55.0 * f0 - 59.0 * f1 + 37.0 * f2 - 9.0 * f3) / 24.0
+        fw = f(w, t[i+1])
         #corrector (Adams-Moulton)
-        x[i+1] = x[i] + h * ( 9.0 * fw + 19.0 * f0 - 5.0 * f1 + f2 ) / 24.0
-        f1, f2, f3 = ( f0, f1, f2 )
+        x[i+1] = x[i] + h * (9.0 * fw + 19.0 * f0 - 5.0 * f1 + f2) / 24.0
+        f1, f2, f3 = (f0, f1, f2)
 
     return x
 
-#-----------------------------------------------------------------------------
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
-if __name__ == "__main__":
-    from pylab import *
+# ? don't need this
 
-    def f( x, t ):
-#        return x * numpy.sin( t )
-        return t * numpy.sin( t )
+# if __name__ == "__main__":
+#     from pylab import *
 
-    a, b = ( 0.0, 20.0 )
-    x0 = 1.0
+#     def f(x, t):
+#         #        return x * numpy.sin( t )
+#         return t * numpy.sin(t)
 
-    n = 51
-    t = numpy.linspace( a, b, n )
+#     a, b = (0.0, 20.0)
+#     x0 = 1.0
 
-    # compute various numerical solutions
-    x_euler = euler( f, x0, t )
-    x_heun = heun( f, x0, t )
-    x_rk2 = rk2a( f, x0, t )
-    x_rk4 = rku4( f, x0, t )
-    x_pc4 = pc4( f, x0, t )
-    t_rkf, x_rkf = rkf( f, a, b, x0, 1e-6, 1.0, 0.01 ) # unequally spaced t
+#     n = 51
+#     t = numpy.linspace(a, b, n)
 
-    # compute true solution values in equal spaced and unequally spaced cases
-    x = sin(t) - t*cos(t)
-    xrkf = sin(t_rkf) - t_rkf*cos(t_rkf)
+#     # compute various numerical solutions
+#     x_euler = euler(f, x0, t)
+#     x_heun = heun(f, x0, t)
+#     x_rk2 = rk2a(f, x0, t)
+#     x_rk4 = rku4(f, x0, t)
+#     x_pc4 = pc4(f, x0, t)
+#     t_rkf, x_rkf = rkf(f, a, b, x0, 1e-6, 1.0, 0.01)  # unequally spaced t
 
-#    figure( 1 )
-    subplot( 2, 2, 1 )
-    plot( t, x_euler, 'b-o', t, x_heun, 'g-o', t, x_rk2, 'r-o' )
-    xlabel( '$t$' )
-    ylabel( '$x$' )
-    title( 'Solutions of $dx/dt = t\,\sin(t) \sin(t)$, $x(0)=1$' )
-    legend( ( 'Euler', 'Heun', 'Midpoint' ), loc='lower left' )
+#     # compute true solution values in equal spaced and unequally spaced cases
+#     x = sin(t) - t*cos(t)
+#     xrkf = sin(t_rkf) - t_rkf*cos(t_rkf)
 
-#    figure( 2 )
-    subplot( 2, 2, 2 )
-    plot( t, x_euler - x, 'b-o', t, x_heun - x, 'g-o', t, x_rk2 - x, 'r-o' )
-    xlabel( '$t$' )
-    ylabel( '$x - x^*$' )
-    title( 'Errors in solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$' )
-    legend( ( 'Euler', 'Heun', 'Midpoint' ), loc='upper left' )
+# #    figure( 1 )
+#     subplot(2, 2, 1)
+#     plot(t, x_euler, 'b-o', t, x_heun, 'g-o', t, x_rk2, 'r-o')
+#     xlabel('$t$')
+#     ylabel('$x$')
+#     title('Solutions of $dx/dt = t\,\sin(t) \sin(t)$, $x(0)=1$')
+#     legend(('Euler', 'Heun', 'Midpoint'), loc='lower left')
 
-#    figure( 3 )
-    subplot( 2, 2, 3 )
-    plot( t, x_rk4, 'b-o', t, x_pc4, 'g-o', t_rkf, x_rkf, 'r-o' )
-    xlabel( '$t$' )
-    ylabel( '$x$' )
-    title( 'Solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$' )
-    legend( ( '$O(h^4)$ Runge-Kutta', '$O(h^4)$ Predictor-Corrector', \
-              'Runge-Kutta-Fehlberg' ), loc='lower left' )
+# #    figure( 2 )
+#     subplot(2, 2, 2)
+#     plot(t, x_euler - x, 'b-o', t, x_heun - x, 'g-o', t, x_rk2 - x, 'r-o')
+#     xlabel('$t$')
+#     ylabel('$x - x^*$')
+#     title('Errors in solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$')
+#     legend(('Euler', 'Heun', 'Midpoint'), loc='upper left')
 
-#    figure( 4 )
-    subplot( 2, 2, 4 )
-    plot( t, x_rk4 - x, 'b-o', t, x_pc4 - x, 'g-o', t_rkf, x_rkf - xrkf, 'r-o' )
-    xlabel( '$t$' )
-    ylabel( '$x - x^*$' )
-    title( 'Errors in solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$' )
-    legend( ( '$O(h^4)$ Runge-Kutta', '$O(h^4)$ Predictor-Corrector', \
-              'Runge-Kutta-Fehlberg' ), loc='lower left' )
+# #    figure( 3 )
+#     subplot(2, 2, 3)
+#     plot(t, x_rk4, 'b-o', t, x_pc4, 'g-o', t_rkf, x_rkf, 'r-o')
+#     xlabel('$t$')
+#     ylabel('$x$')
+#     title('Solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$')
+#     legend(('$O(h^4)$ Runge-Kutta', '$O(h^4)$ Predictor-Corrector',
+#             'Runge-Kutta-Fehlberg'), loc='lower left')
 
-    show()
+# #    figure( 4 )
+#     subplot(2, 2, 4)
+#     plot(t, x_rk4 - x, 'b-o', t, x_pc4 - x, 'g-o', t_rkf, x_rkf - xrkf, 'r-o')
+#     xlabel('$t$')
+#     ylabel('$x - x^*$')
+#     title('Errors in solutions of $dx/dt = t\, \sin(t)$, $x(0)=1$')
+#     legend(('$O(h^4)$ Runge-Kutta', '$O(h^4)$ Predictor-Corrector',
+#             'Runge-Kutta-Fehlberg'), loc='lower left')
+
+#     show()
